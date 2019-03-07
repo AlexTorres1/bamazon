@@ -9,3 +9,21 @@ var connection = mysql.createConnection({
     password: "root",
     database: "bamazonDB"
   });
+
+  // connect to the mysql server and sql database
+connection.connect(function(err) {
+    if (err) throw err;
+    askUser();
+  });
+
+  function askUser(){
+      inquirer.prompt([
+          {
+              type: "input",
+              name: "item",
+
+          }
+      ])
+  }
+
+  askUser();
