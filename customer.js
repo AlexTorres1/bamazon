@@ -21,7 +21,7 @@ connection.connect(function(err) {
           {                
               type: "list",
               name: "item",
-              message: "Hello, would you like to view our inventory?",
+              message: "Hello, would you like to view our inventory?\n",
               choices: ["Yes, show me your inventory!", "No,  not interested"]  
           },
       ]).then(function(answer){
@@ -29,7 +29,7 @@ connection.connect(function(err) {
             // console.log("it works")
             displayInventory();
           }else{
-            console.log("Thank you for stopping by!")
+            console.log("\nThank you for stopping by!")
             connection.end();
           }
       })
@@ -48,7 +48,7 @@ connection.connect(function(err) {
             console.log("Price " + res[i].price);
             console.log("Stock Quantity " + res[i].stock_quantity);
         }
-        console.log("\n\n\n")
+        console.log("\n")
         inquirer.prompt([
             {
                 name: "productID",
@@ -82,22 +82,20 @@ connection.connect(function(err) {
       })
   }
 
-  //having issue with getting this part to work.
+  //having issue with getting this part to work properly.
 
-//   function updateDatabase(subtract, totalBought, answer) {
-//       connection.query("UPDATE products SET stock_quantity=? WHERE id=?", [subtract, answer.productID], function (err, res) {
-//           if(err) throw err;
-//       })
+  function updateDatabase(subtract, totalBought, answer) {
+      connection.query("UPDATE products SET stock_quantity=? WHERE id=?", [subtract, answer.productID], function (err, res) {
+          if(err) throw err;
+      })
 
-//       connection.query("UPDATE products SET product_sales=? WHERE id=?", [totalBought, answer.productID], function(err, res){
-//         if(err) throw err;
-//     })
-
-//       connection.query("SELECT product_name,department_name,price,stock_quantity FROM products WHERE ?", {id: answer.productID}, function(err, res){
-//           if(err) throw err;
-//           var total = answer.total * res[0].price;
-//           console.log("-----You have now purchased-----");
-//           console.log("Product Name: " + res[0].product_name);
-//           console.log("Amount: " + answer.total);
-//           console.log("Your amount due: " + total);
-//       });
+      connection.query("SELECT product_name,department_name,price,stock_quantity FROM products WHERE ?", {id: answer.productID}, function(err, res){
+          if(err) throw err;
+          var total = answer.total * res[0].price;
+          console.log("\n-----You have now purchased-----");
+          console.log("\Department : " + res[0].department_name);
+          console.log("\nProduct Type: " + res[0].product_name);
+          console.log("\nAmount: " + answer.total);
+          console.log("\nYour amount due: " + total);
+      });
+  };
