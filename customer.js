@@ -82,8 +82,22 @@ connection.connect(function(err) {
       })
   }
 
-  function updateDatabase(subtract, totalBought, answer) {
-      connection.query("UPDATE products SET stock_quantity=? WHERE id=?", [subtract, answer.productID], function (err, res){
-          if(err) throw err;
-      })
-  }
+  //having issue with getting this part to work.
+
+//   function updateDatabase(subtract, totalBought, answer) {
+//       connection.query("UPDATE products SET stock_quantity=? WHERE id=?", [subtract, answer.productID], function (err, res) {
+//           if(err) throw err;
+//       })
+
+//       connection.query("UPDATE products SET product_sales=? WHERE id=?", [totalBought, answer.productID], function(err, res){
+//         if(err) throw err;
+//     })
+
+//       connection.query("SELECT product_name,department_name,price,stock_quantity FROM products WHERE ?", {id: answer.productID}, function(err, res){
+//           if(err) throw err;
+//           var total = answer.total * res[0].price;
+//           console.log("-----You have now purchased-----");
+//           console.log("Product Name: " + res[0].product_name);
+//           console.log("Amount: " + answer.total);
+//           console.log("Your amount due: " + total);
+//       });
